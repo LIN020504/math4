@@ -34,9 +34,9 @@ public class Main {
         System.out.println(log);
         System.out.println(pow);
 
-        double[] deviations = {linear.getR(), cubic.getR(), exp.getR(), log.getR(), pow.getR(), quadratic.getR()};
+        Result[] results = {linear, cubic, exp, log, pow, quadratic};
 
-        System.out.println("result compile: " + Result.compile(deviations));
+        System.out.println("result compile: " + Result.compile(results));
 
         // tream.of(linear, quadratic, exp, log, pow, cubic)：这部分代码创建了一个包含了多个 Result 对象的流（Stream）
         //.collect(Collectors.toList())：这是 Stream API 中的终端操作，它用于将流中的元素收集到一个List<Result> 集合中，该集合被命名为 list。

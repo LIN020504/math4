@@ -74,7 +74,14 @@ public class  Result {
         return re;
     }
 
-    public static double compile(double[] deviations){//这里我新建了一个参数deviations，从Main调用了之前计算出的每个函数的R值用于计算
+    public static double compile(Result[] results){//这里直接用一个Results对象数组，把之前算出的所有函数的result对象作为数组传进来
+
+        double[] deviations = new double[results.length];
+
+
+        for (int i = 0; i < results.length; i++) {//获取所有result对象的R值
+            deviations[i] = results[i].R;
+        }
 
         //完全不知道你这里是要做什么，明明结果已经算好了，直接调用就好，为什么要创建这一系列的新对象？？
 //        Result linearResult = new Result(MethodType.LINEAR, coefficients, function, standardDeviation, Deviation, r, R, correlation);
@@ -85,13 +92,16 @@ public class  Result {
 //        Result quadratic = new Result(MethodType.QUADRATIC, coefficients, function, standardDeviation, Deviation, r, R);
 
         double maxDeviation = deviations[0]; // 假设第一个偏差是最大的
+        int maxIndex = 0;//记录最大R值的函数编号
 
         for (int i = 1; i < deviations.length; i++) {
             if (deviations[i] > maxDeviation) {
                 maxDeviation = deviations[i]; // 更新最大偏差
+                maxIndex = i;
             }
         }
 
+        System.out.println("Best function is:" + results[maxIndex].methodType.toString());
         return maxDeviation;
     }
 
