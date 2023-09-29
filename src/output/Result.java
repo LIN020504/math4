@@ -11,14 +11,16 @@ import static method.CommonSolve.R;
 import static method.CommonSolve.r;
 
 public class  Result {
+
+    //这里设置Result类的属性变量完全就错了，不应该使用static，static的变量是直接属于类的，无法从对象访问，应该去掉所有的static，因为每一个函数的结果都应该是为一个对象，而不是静态的类变量！
     private MethodType methodType;
-    private static double[] coefficients; // 近似函数的系数
-    private static Function<Double, Double> function; // 近似函数
-    private static double standardDeviation; // 标准偏差
-    private static double Deviation;
-    private static double r;
-    private static double R;
-    private static double correlation; //线性函数的皮尔逊相关系数
+    private double[] coefficients; // 近似函数的系数
+    private  Function<Double, Double> function; // 近似函数
+    private  double standardDeviation; // 标准偏差
+    private  double Deviation;
+    private  double r;
+    private  double R;
+    private  double correlation; //线性函数的皮尔逊相关系数
     private String functionResult;
     private double[][] tableData;
 
@@ -72,16 +74,15 @@ public class  Result {
         return re;
     }
 
-    public static double compile(){
+    public static double compile(double[] deviations){//这里我新建了一个参数deviations，从Main调用了之前计算出的每个函数的R值用于计算
 
-        Result linearResult = new Result(MethodType.LINEAR, coefficients, function, standardDeviation, Deviation, r, R, correlation);
-        Result expResult = new Result(MethodType.EXPONENTIAL, coefficients, function, standardDeviation, Deviation, r, R);
-        Result cubicResult = new Result(MethodType.CUBIC, coefficients, function, standardDeviation, Deviation, r, R);
-        Result logResult = new Result(MethodType.LOGARITHMIC, coefficients, function, standardDeviation, Deviation, r, R);
-        Result power = new Result(MethodType.POWER, coefficients, function, standardDeviation, Deviation, r, R);
-        Result quadratic = new Result(MethodType.QUADRATIC, coefficients, function, standardDeviation, Deviation, r, R);
-
-        double[] deviations = {linearResult.getR(), cubicResult.getR(), expResult.getR(), logResult.getR(), power.getR(), quadratic.getR()};
+        //完全不知道你这里是要做什么，明明结果已经算好了，直接调用就好，为什么要创建这一系列的新对象？？
+//        Result linearResult = new Result(MethodType.LINEAR, coefficients, function, standardDeviation, Deviation, r, R, correlation);
+//        Result expResult = new Result(MethodType.EXPONENTIAL, coefficients, function, standardDeviation, Deviation, r, R);
+//        Result cubicResult = new Result(MethodType.CUBIC, coefficients, function, standardDeviation, Deviation, r, R);
+//        Result logResult = new Result(MethodType.LOGARITHMIC, coefficients, function, standardDeviation, Deviation, r, R);
+//        Result power = new Result(MethodType.POWER, coefficients, function, standardDeviation, Deviation, r, R);
+//        Result quadratic = new Result(MethodType.QUADRATIC, coefficients, function, standardDeviation, Deviation, r, R);
 
         double maxDeviation = deviations[0]; // 假设第一个偏差是最大的
 
